@@ -6,146 +6,223 @@
 	ATTENTION: This is just an example file. You have to edit it according to your needs.
 -->
 
-<items 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			xsi:noNamespaceSchemaLocation="items.xsd">
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:noNamespaceSchemaLocation="items.xsd">
 
-	<collectiontypes>
-		<collectiontype code="MyProductCollection" elementtype="MyProduct"/>
-		<collectiontype code="MyOrderEntryCollection" elementtype="MyOrderEntry" type="list"/>
-		<collectiontype code="MemberCollection" elementtype="Member"/>
-		<collectiontype code="MemberGroupCollection" elementtype="MemberGroup"/>
-	</collectiontypes>
+    <collectiontypes>
+        <collectiontype code="MyProductCollection" elementtype="MyProduct"/>
+        <collectiontype code="MyOrderEntryCollection" elementtype="MyOrderEntry" type="list"/>
+        <collectiontype code="MyStringCollection" elementtype="java.lang.String" autocreate="true"/>
+        <collectiontype code="MemberCollection" elementtype="Member"/>
+        <collectiontype code="MemberGroupCollection" elementtype="MemberGroup"/>
+    </collectiontypes>
 
-	<enumtypes>
-		<enumtype code="MyTestEnum">
-			<value code="Test1"/>
-			<value code="Test2"/>
-			<value code="Test3"/>
-		</enumtype>
+    <enumtypes>
+        <enumtype code="MyTestEnum">
+            <value code="Test1"/>
+            <value code="Test2"/>
+            <value code="Test3"/>
+        </enumtype>
 
-		<enumtype code="MyDynamicTestEnum" dynamic="true">
-			<value code="DynamicTest1"/>
-			<value code="DynamicTest2"/>
-			<value code="DynamicTest3"/>
-		</enumtype>
-	</enumtypes>
+        <enumtype code="MyDynamicTestEnum" dynamic="true">
+            <value code="DynamicTest1"/>
+            <value code="DynamicTest2"/>
+            <value code="DynamicTest3"/>
+        </enumtype>
 
-	<maptypes>
-		<maptype code="MyTestMap"
-				 argumenttype="java.lang.Integer"
-				 returntype="java.lang.String"/>
-	</maptypes>
+        <enumtype code="ConcertType" autocreate="true" generate="true" dynamic="false">
+            <value code="openair"/>
+            <value code="indoor"/>
+        </enumtype>
 
-	<relations>
-		<relation code="MyOrder2MyOrderEntry" localized="false">
-			<sourceElement type="MyOrder" qualifier="order" cardinality="one">
-				<modifiers read="true" write="true" search="true" optional="true" />
-				<custom-properties>
-					<property name="ordering.attribute">
-						<value>"entryNumber"</value>
-					</property>
-				</custom-properties>
-			</sourceElement>
-			<targetElement type="MyOrderEntry" qualifier="entries"
-						   cardinality="many" collectiontype="list" ordered="false">
-				<modifiers read="true" write="true" search="true" optional="true" partof="true" />
-			</targetElement>
-		</relation>
+        <enumtype code="MusicType" autocreate="true" generate="true" dynamic="true">
+        </enumtype>
+    </enumtypes>
 
-		<relation code="MemberGroupRelation" localized="false">
-			<deployment table="MemberGroupRelations" typecode="12345"/>
-			<sourceElement qualifier="members" type="Member" collectiontype="set" cardinality="many" ordered="false">
-				<modifiers read="true" write="true" search="true" optional="true"/>
-			</sourceElement>
-			<targetElement qualifier="groups" type="MemberGroup" collectiontype="set" cardinality="many"
-						   ordered="false">
-				<modifiers read="true" write="true" search="true" optional="true"/>
-			</targetElement>
-		</relation>
-	</relations>
+    <maptypes>
+        <maptype code="MyTestMap"
+                 argumenttype="java.lang.Integer"
+                 returntype="java.lang.String"/>
+    </maptypes>
 
-	<itemtypes>
-		<itemtype generate="true"
-		   code="MyProduct"
-		   jaloclass="org.training.jalo.MyProduct"
-		   extends="Product"
-		   autocreate="true"
-	   >
-			<attributes>
-				<attribute qualifier="myExampleInitialStringField" type="java.lang.String">
-					<description>My Example Initial String Value</description>
-					<modifiers initial="true"/>
-					<persistence type="property"/>
-				</attribute>
+    <relations>
+        <relation code="MyOrder2MyOrderEntry" localized="false">
+            <sourceElement type="MyOrder" qualifier="order" cardinality="one">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+                <custom-properties>
+                    <property name="ordering.attribute">
+                        <value>"entryNumber"</value>
+                    </property>
+                </custom-properties>
+            </sourceElement>
+            <targetElement type="MyOrderEntry" qualifier="entries"
+                           cardinality="many" collectiontype="list" ordered="false">
+                <modifiers read="true" write="true" search="true" optional="true" partof="true"/>
+            </targetElement>
+        </relation>
 
-				<attribute qualifier="myExampleBooleanField" type="java.lang.Boolean">
-					<description>Example Initial Boolean Field</description>
-               <persistence type="property"/>
-				</attribute>
+        <relation code="MemberGroupRelation" localized="false">
+            <deployment table="MemberGroupRelations" typecode="12345"/>
+            <sourceElement qualifier="members" type="Member" collectiontype="set" cardinality="many" ordered="false">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </sourceElement>
+            <targetElement qualifier="groups" type="MemberGroup" collectiontype="set" cardinality="many"
+                           ordered="false">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </targetElement>
+        </relation>
 
-				<attribute qualifier="media" type="Media">
-					<persistence type="property"/>
-				</attribute>
+        <relation code="Product2RockBand" autocreate="true" generate="false" localized="false">
+            <sourceElement qualifier="tours" type="Product" collectiontype="set" cardinality="many" ordered="false">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </sourceElement>
+            <targetElement qualifier="band" type="Band" cardinality="one">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </targetElement>
+        </relation>
+    </relations>
 
-			</attributes>
-		</itemtype>
+    <itemtypes>
+        <itemtype generate="true"
+                  code="ContactRequest"
+                  jaloclass="org.training.jalo.ContactRequest"
+                  extends="GenericItem"
+                  autocreate="true">
+            <deployment table="UserRights" typecode="12000"/>
+            <attributes>
+                <attribute qualifier="message" type="java.lang.String">
+                    <description>Message</description>
+                    <modifiers initial="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="sender" type="java.lang.String">
+                    <description>Sender</description>
+                    <modifiers initial="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
 
-		<itemtype code="MyTestParent"
-				  jaloclass="training.jalo.MyTestParent"
-				  extends="GenericItem">
-			<deployment table="MyTestParents" typecode="12346"/>
-			<attributes>
-				<attribute qualifier="testKid" type="MyTestKid">
-					<modifiers read="true" write="true" partof="true"/>
-					<persistence type="property"/>
-				</attribute>
-			</attributes>
-		</itemtype>
+        <itemtype generate="true" code="Band" autocreate="true">
+            <deployment table="Bands" typecode="30268"/>
+            <attributes>
+                <attribute qualifier="code" type="java.lang.String">
+                    <description>short unique code of band</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="name" type="java.lang.String">
+                    <description>name of band</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="history" type="java.lang.String">
+                    <description>history of band</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="albumSales" type="java.lang.Long">
+                    <description>official global album sales</description>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
 
-		<itemtype code="MyTestKid"
-				  jaloclass="training.jalo.MyTestKid"
-				  extends="GenericItem">
-			<deployment table="MyTestKids" typecode="12347"/>
-			<attributes>
-				<attribute qualifier="parent" type="MyTestParent">
-					<persistence type="property"/>
-					<modifiers read="true" write="false" search="true" optional="true" private="false" initial="true"/>
-				</attribute>
-			</attributes>
-		</itemtype>
+        <itemtype generate="true" code="Concert" extends="VariantProduct" autocreate="true">
+            <attributes>
+                <attribute qualifier="venue" type="java.lang.String">
+                    <description>venue of concert</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="date" type="java.util.Date">
+                    <description>date of concert</description>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="concertType" type="ConcertType">
+                    <description>type of concert (indoors or open air)</description>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
 
-		<itemtype code="MyOrder"
-				  jaloclass="training.jalo.MyOrder"
-				  extends="GenericItem">
-			<deployment table="MyOrders" typecode="12348"/>
-		</itemtype>
+        <itemtype generate="true"
+                  code="MyProduct"
+                  jaloclass="org.training.jalo.MyProduct"
+                  extends="Product"
+                  autocreate="true"
+        >
+            <attributes>
+                <attribute qualifier="myExampleInitialStringField" type="java.lang.String">
+                    <description>My Example Initial String Value</description>
+                    <modifiers initial="true"/>
+                    <persistence type="property"/>
+                </attribute>
 
-		<itemtype code="MyOrderEntry"
-				  jaloclass="training.jalo.MyOrderEntry"
-				  extends="GenericItem">
-			<deployment table="MyOrderEntries" typecode="12349"/>
-			<attributes>
-				<attribute qualifier="order" type="MyOrder">
-					<modifiers read="true" write="false" search="true" removable="true"
-							   optional="false" initial="true" unique="true"/>
-				</attribute>
-			</attributes>
-		</itemtype>
+                <attribute qualifier="myExampleBooleanField" type="java.lang.Boolean">
+                    <description>Example Initial Boolean Field</description>
+                    <persistence type="property"/>
+                </attribute>
 
-		<itemtype code="Member"
-				  jaloclass="training.jalo.Member"
-				  extends="GenericItem">
-			<deployment table="Members" typecode="12350"/>
-		</itemtype>
+                <attribute qualifier="media" type="Media">
+                    <persistence type="property"/>
+                </attribute>
 
-		<itemtype code="MemberGroup"
-				  jaloclass="training.jalo.MemberGroup"
-				  extends="GenericItem">
-			<deployment table="MemberGroups" typecode="12351"/>
-			<attributes>
-				<attribute qualifier="members" type="MemberCollection"/>
-			</attributes>
-		</itemtype>
+            </attributes>
+        </itemtype>
 
-	</itemtypes>
+        <itemtype code="MyTestParent"
+                  jaloclass="org.training.jalo.MyTestParent"
+                  extends="GenericItem">
+            <deployment table="MyTestParents" typecode="12346"/>
+            <attributes>
+                <attribute qualifier="testKid" type="MyTestKid">
+                    <modifiers read="true" write="true" partof="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="MyTestKid"
+                  jaloclass="org.training.jalo.MyTestKid"
+                  extends="GenericItem">
+            <deployment table="MyTestKids" typecode="12347"/>
+            <attributes>
+                <attribute qualifier="parent" type="MyTestParent">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="false" search="true" optional="true" private="false" initial="true"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="MyOrder"
+                  jaloclass="org.training.jalo.MyOrder"
+                  extends="GenericItem">
+            <deployment table="MyOrders" typecode="12348"/>
+        </itemtype>
+
+        <itemtype code="MyOrderEntry"
+                  jaloclass="org.training.jalo.MyOrderEntry"
+                  extends="GenericItem">
+            <deployment table="MyOrderEntries" typecode="12349"/>
+            <attributes>
+                <attribute qualifier="order" type="MyOrder">
+                    <modifiers read="true" write="false" search="true" removable="true"
+                               optional="false" initial="true" unique="true"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype code="Member"
+                  jaloclass="org.training.jalo.Member"
+                  extends="GenericItem">
+            <deployment table="Members" typecode="12350"/>
+        </itemtype>
+
+        <itemtype code="MemberGroup"
+                  jaloclass="org.training.jalo.MemberGroup"
+                  extends="GenericItem">
+            <deployment table="MemberGroups" typecode="12351"/>
+            <attributes>
+                <attribute qualifier="members" type="MemberCollection"/>
+            </attributes>
+        </itemtype>
+
+    </itemtypes>
 </items>

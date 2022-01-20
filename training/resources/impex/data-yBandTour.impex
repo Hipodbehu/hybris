@@ -1,0 +1,2 @@
+INSERT_UPDATE Concert; code[unique = true]; name      ; date[dateformat = dd.MM.yyyy]; venue           ; concertType(code);
+                     ; 20170106           ; Supertour ; 23.11.2029                   ; "Paris, France" ; openair          ;

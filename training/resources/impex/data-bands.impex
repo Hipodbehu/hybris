@@ -1,0 +1,3 @@
+INSERT_UPDATE Band; code[unique = true]; name  ; albumSales; history
+                  ; A007               ; Malt  ; 1000000   ; Cool group
+                  ; A008               ; Crons ; 200       ; New group without history

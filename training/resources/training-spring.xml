@@ -74,6 +74,7 @@
     <bean id="trainingSystemSetup" class="org.training.setup.TrainingSystemSetup">
         <!-- constructor arg injection example -->
         <constructor-arg ref="trainingService"/>
+        <property name="importService" ref="importService"/>
     </bean>
 
     <bean id="trainingService" class="org.training.service.impl.DefaultTrainingService">

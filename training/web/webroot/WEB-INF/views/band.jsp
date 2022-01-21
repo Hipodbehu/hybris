@@ -1,0 +1,9 @@
+<html>
+<head>
+    <title>Band</title>
+</head>
+<body>
+<h1>${band}</h1>
+${band.name}
+</body>
+</html>

@@ -12,7 +12,6 @@
     <collectiontypes>
         <collectiontype code="MyProductCollection" elementtype="MyProduct"/>
         <collectiontype code="MyOrderEntryCollection" elementtype="MyOrderEntry" type="list"/>
-        <collectiontype code="MyStringCollection" elementtype="java.lang.String" autocreate="true"/>
         <collectiontype code="MemberCollection" elementtype="Member"/>
         <collectiontype code="MemberGroupCollection" elementtype="MemberGroup"/>
     </collectiontypes>
@@ -80,6 +79,15 @@
                 <modifiers read="true" write="true" search="true" optional="true"/>
             </targetElement>
         </relation>
+        <relation code="Band2MusicType" autocreate="true" generate="false" localized="false">
+            <deployment table="Band2MusicType" typecode="30269"/>
+            <sourceElement qualifier="bands" type="Band" collectiontype="set" cardinality="many" ordered="false">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </sourceElement>
+            <targetElement qualifier="types" type="MusicType" cardinality="many">
+                <modifiers read="true" write="true" search="true" optional="true"/>
+            </targetElement>
+        </relation>
     </relations>
 
     <itemtypes>
@@ -98,6 +106,15 @@
                 <attribute qualifier="sender" type="java.lang.String">
                     <description>Sender</description>
                     <modifiers initial="true"/>
+                    <persistence type="property"/>
+                </attribute>
+            </attributes>
+        </itemtype>
+
+        <itemtype generate="true" code="Product" autocreate="false">
+            <attributes>
+                <attribute qualifier="hashtag" type="java.lang.String">
+                    <description>hashtag of concert tour for social media</description>
                     <persistence type="property"/>
                 </attribute>
             </attributes>

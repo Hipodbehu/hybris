@@ -1,6 +1,5 @@
 package org.training.service.impl;
 
-import de.hybris.platform.accountsummaryaddon.controllers.pages.AccountStatusController;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.jalo.product.Product;
 import de.hybris.platform.product.impl.DefaultProductService;
@@ -12,7 +11,7 @@ import de.hybris.platform.servicelayer.search.SearchResult;
 import org.springframework.beans.factory.annotation.Required;
 import org.training.service.TrainingProductService;
 
-public class TrainingProductServiceImpl extends DefaultProductService implements TrainingProductService {
+public class DefaultTrainingProductService extends DefaultProductService implements TrainingProductService {
   private FlexibleSearchService flexibleSearchService;
 
   @Override

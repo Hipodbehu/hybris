@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Required;
 import org.training.model.BandModel;
 import org.training.service.BandService;
 
+import java.util.List;
+
 public class DefaultBandService implements BandService {
   private FlexibleSearchService flexibleSearchService;
 
@@ -24,6 +26,13 @@ public class DefaultBandService implements BandService {
       throw new AmbiguousIdentifierException("Band code is not unique!");
     }
     return result.getResult().get(0);
+  }
+
+  @Override
+  public List<BandModel> getBands() {
+    final FlexibleSearchQuery query = new FlexibleSearchQuery("SELECT {PK} FROM {BAND}");
+    final SearchResult<BandModel> result = this.flexibleSearchService.search(query);
+    return result.getResult();
   }
 
   @Required

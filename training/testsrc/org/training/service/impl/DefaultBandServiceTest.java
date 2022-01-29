@@ -9,14 +9,23 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.training.model.BandModel;
 import org.training.service.BandService;
 
+import javax.annotation.Resource;
+import java.util.List;
+
 @IntegrationTest
 public class DefaultBandServiceTest extends ServicelayerBaseTest {
-  @Autowired
+  @Resource
   private BandService bandService;
 
-  @Test
-  public void shouldReturnNullWhenValidData() {
+  @Test(expected = UnknownIdentifierException.class)
+  public void shouldThrowExceptionWhenValidDataButNotFoundGetBand() {
     BandModel band = bandService.getBand("A001");
-    Assert.assertTrue(band == null);
+    Assert.assertNotNull(band);
+  }
+
+  @Test
+  public void shouldReturnEmptyWhenValidDataGetBands() {
+    List<BandModel> bandModels = bandService.getBands();
+    Assert.assertTrue(bandModels.isEmpty());
   }
 }

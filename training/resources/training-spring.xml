@@ -100,17 +100,8 @@
         <property name="flexibleSearchService" ref="flexibleSearchService"/>
     </bean>
 
-    <alias alias="productService" name="trainingProductService"/>
-
-    <bean id="productFacade" class="org.training.facades.impl.DefaultProductFacade">
-        <property name="productService" ref="productService"/>
-        <property name="priceService" ref="priceService"/>
-        <property name="productConverter" ref="productConverter"/>
-        <property name="priceInformationConverter" ref="priceInformationConverter"/>
+    <alias name = "defaultBandFacade" alias = "bandFacade" />
+    <bean id = "defaultBandFacade" class ="org.training.facades.impl.DefaultBandFacade" >
+        <property name = "bandService" ref = "bandService" />
     </bean>
-
-    <bean id="productConverter" class="org.training.converters.ProductConverter"/>
-
-    <bean id="priceInformationConverter" class="org.training.converters.PriceInformationConverter"/>
-
 </beans>

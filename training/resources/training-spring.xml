@@ -104,4 +104,6 @@
     <bean id = "defaultBandFacade" class ="org.training.facades.impl.DefaultBandFacade" >
         <property name = "bandService" ref = "bandService" />
     </bean>
+
+    <bean id="concertDaysUntilAttributeHandler" class="org.training.attributehandlers.ConcertDaysUntilAttributeHandler"/>
 </beans>

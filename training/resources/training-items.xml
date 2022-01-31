@@ -121,7 +121,7 @@
                   jaloclass="org.training.jalo.ContactRequest"
                   extends="GenericItem"
                   autocreate="true">
-            <deployment table="UserRights" typecode="12000"/>
+            <deployment table="RequestUserRights" typecode="12006"/>
             <attributes>
                 <attribute qualifier="message" type="java.lang.String">
                     <description>Message</description>
@@ -171,6 +171,10 @@
                 <attribute qualifier="concertType" type="ConcertType">
                     <description>type of concert (indoors or open air)</description>
                     <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="daysUntil" type="java.lang.Long">
+                    <persistence type="dynamic" attributeHandler="concertDaysUntilAttributeHandler"/>
+                    <modifiers read="true" write="false"/>
                 </attribute>
             </attributes>
         </itemtype>

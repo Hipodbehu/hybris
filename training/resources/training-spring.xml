@@ -106,4 +106,17 @@
     </bean>
 
     <bean id="concertDaysUntilAttributeHandler" class="org.training.attributehandlers.ConcertDaysUntilAttributeHandler"/>
+
+    <bean id="concerttourEventListener" class="org.training.events.NewBandEventListener" parent="abstractEventListener">
+        <property name="modelService" ref="modelService" />
+    </bean>
+
+    <bean id="bandAlbumSalesInterceptor" class="org.training.interceptors.BandAlbumSalesInterceptor" />
+    <bean id="BandInterceptorMapping" class="de.hybris.platform.servicelayer.interceptor.impl.InterceptorMapping">
+        <property name="interceptor" ref="bandAlbumSalesInterceptor" />
+        <property name="typeCode" value="Band" />
+    </bean>
+    <bean id="bandAlbumSalesEventListener" class="org.training.events.BandAlbumSalesEventListener" parent="abstractEventListener" >
+        <property name="modelService" ref="modelService" />
+    </bean>
 </beans>

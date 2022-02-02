@@ -119,4 +119,12 @@
     <bean id="bandAlbumSalesEventListener" class="org.training.events.BandAlbumSalesEventListener" parent="abstractEventListener" >
         <property name="modelService" ref="modelService" />
     </bean>
+
+    <bean id="itemForCronjobDao" class="org.training.daos.impl.DefaultItemForCronjobDao"
+          parent="abstractItemDao"/>
+
+    <bean id="itemForCronjobService" class="org.training.service.impl.DefaultItemForCronjobService">
+        <property name="itemForCronjobDao" ref="itemForCronjobDao"/>
+    </bean>
+    <bean id="generateValueJob" class="org.training.jobs.GenerateValueJob" parent="abstractJobPerformable"/>
 </beans>

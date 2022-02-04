@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.servicelayer.config.ConfigurationService;
 import org.springframework.beans.factory.annotation.Required;
 import org.training.data.BandData;
 import org.training.data.TourSummaryData;
@@ -16,11 +17,15 @@ import org.training.service.BandService;
 import java.util.Locale;
 
 public class DefaultBandFacade implements BandFacade {
+  private static final String NAME = "band.name";
+
   private BandService bandService;
+  private ConfigurationService configurationService;
 
   @Override
   public List<BandData> getBands() {
     final List<BandModel> bandModels = bandService.getBands();
+    final String name = configurationService.getConfiguration().getString(NAME);
     final List<BandData> bandFacadeData = new ArrayList<>();
     for (final BandModel sm : bandModels) {
       final BandData sfd = new BandData();
@@ -63,5 +68,11 @@ public class DefaultBandFacade implements BandFacade {
   @Required
   public void setBandService(final BandService bandService) {
     this.bandService = bandService;
+  }
+
+
+  @Required
+  public void setConfigurationService(final ConfigurationService configurationService) {
+    this.configurationService = configurationService;
   }
 }

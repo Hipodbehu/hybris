@@ -10,7 +10,7 @@
 
 	<!--
 		Example Data POJO
-	
+
 	<bean class="org.training.data.AbstractPojo" abstract="true">
 		<property name="id" type="String"/>
 		<property name="flag" type="boolean"/>
@@ -27,7 +27,7 @@
 		<import type="javax.xml.bind.annotation.XmlElement"/>
 
 		<annotations>@XmlRootElement</annotations>
-		
+
 		<property name="someText" type="String">
 
 			<annotations scope="getter">
@@ -73,5 +73,19 @@
 		<property name = "albumsSold" type = "Long" />
 		<property name = "genres" type="java.util.List&lt;String&gt;"/>
 		<property name = "tours" type="java.util.List&lt;org.training.data.TourSummaryData&gt;"/>
+	</bean>
+	<bean class = "org.training.data.ConcertSummaryData">
+		<description >Data object for a concert summary</description>
+		<property name = "id" type = "String" />
+		<property name = "date" type = "java.util.Date" />
+		<property name = "venue" type = "String" />
+		<property name = "type" type = "String" />
+	</bean>
+	<bean class = "org.training.data.TourData" >
+		<description>Data object representing a tour</description>
+		<property name = "id" type = "String" />
+		<property name = "tourName" type = "String" />
+		<property name = "description" type = "String" />
+		<property name = "concerts" type="java.util.List&lt;org.training.data.ConcertSummaryData&gt;"/>
 	</bean>
 </beans>

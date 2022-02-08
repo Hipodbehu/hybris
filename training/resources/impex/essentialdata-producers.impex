@@ -1,0 +1,3 @@
+INSERT_UPDATE Producer; code[unique = true]; firstName; surname;
+                      ; P001               ; Jack     ; Black
+                      ; P002               ; Smith    ; Jambo

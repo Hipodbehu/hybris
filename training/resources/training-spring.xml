@@ -130,4 +130,16 @@
         <property name="itemForCronjobDao" ref="itemForCronjobDao"/>
     </bean>
     <bean id="generateValueJob" class="org.training.jobs.GenerateValueJob" parent="abstractJobPerformable"/>
+
+    <bean id="producerService" class="org.training.service.impl.DefaultProducerService">
+        <property name="producerDao" ref="producerDao"/>
+    </bean>
+
+    <alias name="defaultProducerFacade" alias="producerFacade"/>
+    <bean id="defaultProducerFacade" class="org.training.facades.impl.DefaultProducerFacade">
+        <property name="producerService" ref="producerService"/>
+    </bean>
+
+    <bean id="producerDao" class="org.training.daos.impl.DefaultProducerDao"
+          parent="abstractItemDao"/>
 </beans>

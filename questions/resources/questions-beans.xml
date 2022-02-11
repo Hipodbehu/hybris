@@ -17,4 +17,15 @@
 	</bean>
 	-->
 
+	<bean class="com.myapp.data.QuestionData">
+		<description>Data object representing Question</description>
+		<property name="question" type="String"/>
+		<property name="questionCustomerName" type="String"/>
+		<property name="answer" type="String"/>
+	</bean>
+	<bean class="com.myapp.data.ProductData">
+		<description>Data object representing Product</description>
+		<property name="name" type="String"/>
+		<property name="questions" type="java.util.List&lt;com.myapp.data.QuestionData&gt;"/>
+	</bean>
 </beans>

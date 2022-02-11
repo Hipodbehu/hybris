@@ -36,4 +36,16 @@
 		<property name="extensionName" value="questions" />
 	</bean>
 
+	<bean id="customQuestionConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.myapp.data.QuestionData"/>
+		<property name="populators">
+			<list>
+				<ref bean="customQuestionPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="customQuestionPopulator"
+		  class="com.myapp.facades.question.convertes.populators.CustomQuestionPopulator"/>
+
 </beans>

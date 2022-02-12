@@ -192,8 +192,10 @@
             <deployment table="Bands" typecode="30268"/>
             <attributes>
                 <attribute qualifier="code" type="java.lang.String">
+                    <defaultvalue>bCodeDefault</defaultvalue>
                     <description>short unique code of band</description>
                     <persistence type="property"/>
+                    <modifiers optional="false" unique="true"/>
                 </attribute>
                 <attribute qualifier="name" type="java.lang.String">
                     <description>name of band</description>
@@ -229,7 +231,28 @@
 
         <itemtype generate="true" code="News" autocreate="true">
             <deployment table="News" typecode="30270"/>
+            <custom-properties>
+                <property name="catalogItemType">
+                    <value>java.lang.Boolean.TRUE</value>
+                </property>
+                <property name="catalogVersionAttributeQualifier">
+                    <value>"catalogVersion"</value>
+                </property>
+                <property name="uniqueKeyAttributeQualifier">
+                    <value>"code"</value>
+                </property>
+            </custom-properties>
             <attributes>
+                <attribute qualifier="catalogVersion" type="CatalogVersion">
+                    <modifiers read="true" write="false" search="true" initial="true" optional="false" unique="true"/>
+                    <persistence type="property"/>
+                </attribute>
+                <attribute qualifier="code" type="java.lang.String">
+                    <defaultvalue>defaultCode</defaultvalue>
+                    <description>short unique code of news</description>
+                    <modifiers optional="false" unique="true"/>
+                    <persistence type="property"/>
+                </attribute>
                 <attribute qualifier="date" type="java.util.Date">
                     <description>date of news item</description>
                     <persistence type="property"/>
@@ -264,7 +287,7 @@
             <attributes>
                 <attribute qualifier="myExampleInitialStringField" type="java.lang.String">
                     <description>My Example Initial String Value</description>
-                    <modifiers initial="true"/>
+                    <modifiers initial="true" />
                     <persistence type="property"/>
                 </attribute>
 

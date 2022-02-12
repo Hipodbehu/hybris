@@ -1,0 +1,2 @@
+INSERT_UPDATE SearchRestriction; code[unique = true]   ; name ; query                          ; principal(UID); restrictedType(code); active; generate
+                               ; SearchRestrictionNews ; News ; {catalogVersion} LIKE 'Online' ; admingroup    ; News                ; true  ; true

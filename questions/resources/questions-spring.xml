@@ -13,7 +13,7 @@
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context.xsd">
            
-    <context:annotation-config/> 
+    <context:annotation-config/>
 
 	<bean id="questionsCoreDataImportedEventListener" parent="abstractCoreDataImportedEventListener">
 		<property name="supportedChannels">
@@ -46,6 +46,6 @@
 	</bean>
 
 	<bean id="customQuestionPopulator"
-		  class="com.myapp.facades.question.convertes.populators.CustomQuestionPopulator"/>
+		  class="com.myapp.questions.facades.question.convertes.populators.CustomQuestionPopulator"/>
 
 </beans>
